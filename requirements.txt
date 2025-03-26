@@ -1,0 +1,9 @@
+streamlit
+scikit-learn
+pandas
+numpy
+seaborn
+matplotlib
+joblib
+fpdf
+ydata-profiling
