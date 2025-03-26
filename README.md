@@ -64,9 +64,9 @@ streamlit run app.py
 ## 🤖 **Machine Learning Model**
 - **Model Used:** `RandomForestRegressor`
 - **Performance Metrics:(For this project)**
-  - **MAE:** `XYZ`
-  - **MSE:** `XYZ`
-  - **R² Score:** `XYZ`
+  - **MAE:** `100.66`
+  - **MSE:** `138934.15`
+  - **R² Score:** `0.9998`
   
 ```python
 # Model Training Code
@@ -107,6 +107,6 @@ Want to contribute? Follow these steps:
 
 ## 📧 **Contact & Support**
 🔗 **GitHub:** [imabhnv](https://github.com/imabhnv)  
-📩 **Email:** your-email@example.com  
+📩 **Email:** varshneyabhinav66@gmail.com  
 
 📌 **Star ⭐ the repo if you found this useful!** 🚀  
