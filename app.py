@@ -1,17 +1,32 @@
 import streamlit as st
 import numpy as np
+import pandas as pd
 import joblib  
 
 model = joblib.load("mortality_model.pkl")
 label_encoders = joblib.load("label_encoders.pkl")
 
-st.title("🚬 Tobacco Use & Mortality Prediction 🏥")
+df = pd.read_csv("fatalities.csv")  
+icd10_mapping = df[["ICD10 Code", "ICD10 Diagnosis"]].dropna().drop_duplicates()
 
+st.title("🚬 Tobacco Use & Mortality Prediction 🏥")
 st.write("Enter the details below to predict mortality.")
 
+icd10_options = ["Enter Manually"] + sorted(icd10_mapping["ICD10 Code"].unique().tolist())
+selected_icd10 = st.selectbox("Select ICD-10 Code (or enter manually)", icd10_options)
+
+if selected_icd10 == "Enter Manually":
+    icd10_code = st.text_input("Enter ICD-10 Code", "")
+else:
+    icd10_code = selected_icd10
+
+if icd10_code and icd10_code in icd10_mapping["ICD10 Code"].values:
+    diagnoses_for_code = icd10_mapping[icd10_mapping["ICD10 Code"] == icd10_code]["ICD10 Diagnosis"].unique().tolist()
+    icd10_diagnosis = st.selectbox("Select ICD-10 Diagnosis", diagnoses_for_code)
+else:
+    icd10_diagnosis = st.text_input("Enter ICD-10 Diagnosis", "")
+
 year = st.number_input("Year", min_value=2000, max_value=2030, value=2022)
-icd10_code = st.text_input("ICD10 Code", "J40")  
-icd10_diagnosis = st.text_input("ICD10 Diagnosis", "Bronchitis")  
 diagnosis_type = st.text_input("Diagnosis Type", "Primary")  
 metric = st.text_input("Metric", "Mortality Rate")  
 sex = st.selectbox("Sex", ["Male", "Female"])  
@@ -35,7 +50,7 @@ try:
     diagnosis_type_encoded = label_encoders["Diagnosis Type"].transform([diagnosis_type])[0] if diagnosis_type in label_encoders["Diagnosis Type"].classes_ else 0
     metric_encoded = label_encoders["Metric"].transform([metric])[0] if metric in label_encoders["Metric"].classes_ else 0
     sex_encoded = label_encoders["Sex_x"].transform([sex])[0] if sex in label_encoders["Sex_x"].classes_ else 0
-    
+
     feature_order = [
         "Year", "ICD10 Code", "ICD10 Diagnosis", "Diagnosis Type", "Metric",  
         "Sex_x", "Tobacco Price\nIndex", "Retail Prices\nIndex", 
