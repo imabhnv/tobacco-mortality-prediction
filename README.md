@@ -91,8 +91,7 @@ python generate_report.py
 
 ## ⚡ **Future Improvements**
 ✅ Improve model accuracy with hyperparameter tuning  
-✅ Add more advanced ML models like **XGBoost, LSTM**  
-✅ Deploy on **Streamlit Cloud / AWS** for online access  
+✅ Add more advanced ML models like **XGBoost, LSTM** 
 
 ---
 
