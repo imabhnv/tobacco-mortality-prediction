@@ -2,6 +2,7 @@
 
 This project analyzes the relationship between tobacco use and mortality rates using **Machine Learning**.  
 It predicts mortality based on various factors like smoking prevalence, tobacco pricing, and demographic data.
+[Live App](https://tobacco-mortality-prediction.streamlit.app/)  
 
 ---
 
